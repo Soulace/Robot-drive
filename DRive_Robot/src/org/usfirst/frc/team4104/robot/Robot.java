@@ -27,32 +27,39 @@ public class Robot extends TimedRobot {
 	public static WPI_TalonSRX RightMotor1=new WPI_TalonSRX(3);
 	public static WPI_TalonSRX RightMotor2=new WPI_TalonSRX(4);
 
+        SpeedControllerGroup m_left = new SpeedControllerGroup(LeftMotor1, LeftMotor2);
+	SpeedControllerGroup m_right = new SpeedControllerGroup(RightMotor1, RightMotor2);
 
+        DifferentialDrive m_drive = new DifferentialDrive(m_left, m_right);
 
 	public class Robot2 extends IterativeRobot {
-	private DifferentialDrive m_myRobot;
-	private Joystick m_leftStick;
-	private Joystick m_rightStick;
+	
+	private Joystick m_leftStick = new Joystick(1);
+	private Joystick m_rightStick = new Joystick(2);
 
 	@Override
 	public void robotInit() {
-		m_myRobot = new DifferentialDrive(null,null);
-		m_leftStick = new Joystick(1);
-		m_rightStick = new Joystick(2);
+		
+		
+		//m_myRobot = new DifferentialDrive(null,null);
+		//m_leftStick = new Joystick(1);
+		//m_rightStick = new Joystick(2);
 		
 	
 	} 
 
 	@Override
-	public void teleopPeriodic() {Scheduler.getInstance().run();
-	m_myRobot.tankDrive(m_leftStick.getRawAxis(0), m_rightStick.getRawAxis(0));
-	double leftSpeed = -m_rightStick.getRawAxis(1);
-	double rightSpeed = -m_leftStick.getRawAxis(1);
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+		
+		m_drive.tankDrive(m_leftStick.getRawAxis(0), m_rightStick.getRawAxis(0));
+		//double leftSpeed = -m_rightStick.getRawAxis(1);
+		//double rightSpeed = -m_leftStick.getRawAxis(1);
 	
-	LeftMotor1.set(leftSpeed);
-	LeftMotor2.set(leftSpeed);
-	RightMotor1.set(rightSpeed);
-	RightMotor2.set(rightSpeed);
+		//LeftMotor1.set(leftSpeed);
+		//LeftMotor2.set(leftSpeed);
+		//RightMotor1.set(rightSpeed);
+		//RightMotor2.set(rightSpeed);
 	
 		}
 	}
