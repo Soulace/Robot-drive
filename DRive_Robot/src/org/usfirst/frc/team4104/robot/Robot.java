@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * This is a demo program showing the use of the RobotDrive class, specifically
  * it contains the code necessary to operate a robot with tank drive.
  */
-public class Robot extends TimedRobot {
+public class Robot extends IterativeRobot {
 
 	public static WPI_TalonSRX LeftMotor1=new WPI_TalonSRX(1);
 	public static WPI_TalonSRX LeftMotor2=new WPI_TalonSRX(2);
@@ -32,11 +32,11 @@ public class Robot extends TimedRobot {
 
         DifferentialDrive m_drive = new DifferentialDrive(m_left, m_right);
 
-	public class Robot2 extends IterativeRobot {
 	
 	private Joystick m_leftStick = new Joystick(1);
 	private Joystick m_rightStick = new Joystick(2);
 
+	
 	@Override
 	public void robotInit() {
 		
@@ -47,7 +47,11 @@ public class Robot extends TimedRobot {
 		
 	
 	} 
-
+	
+	public void teleopInit() {
+		//The teleopInit method is called once each time the robot enters teleop mode
+	}
+	
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
@@ -61,6 +65,6 @@ public class Robot extends TimedRobot {
 		//RightMotor1.set(rightSpeed);
 		//RightMotor2.set(rightSpeed);
 	
-		}
+		
 	}
 }
